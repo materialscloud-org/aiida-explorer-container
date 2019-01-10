@@ -53,10 +53,16 @@ WORKDIR /home/app/frontend_explore
 RUN bundle install
 RUN npm install
 RUN bower install
+
+ARG AIIDA_REST_API
+# Use # as separator to avoid problems with slashes in URLs
+RUN  sed -i "s#<%= yeoman.hostBackend %>/sssplibrary/api/v2#$AIIDA_REST_API#g" /home/app/frontend_explore/Gruntfile.js
+
 RUN grunt build 
 
 # set home for app user
 ENV HOME /home/app
+
 
 # go back to root user for startup
 USER root
