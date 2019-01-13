@@ -48,11 +48,17 @@ RUN cp frontend_theme/theme/mcloud_theme.css frontend_explore/app/styles/css/mcl
 RUN chown -R app:app /home/app
 
 # install app for app user
+# note: this takes several minutes
 USER app
 WORKDIR /home/app/frontend_explore
 RUN bundle install
 RUN npm install
 RUN bower install
+
+# touch "upstream_changed" to rebuild with changes from github
+COPY upstream_changed .
+RUN GIT_SSH_COMMAND='ssh -i /home/app/.ssh/deploy-standalone -o StrictHostKeyChecking=no' git pull
+
 
 ARG AIIDA_REST_API
 # Use # as separator to avoid problems with slashes in URLs
