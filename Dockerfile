@@ -58,6 +58,7 @@ RUN bower install
 # touch "upstream_changed" to rebuild with changes from github
 COPY upstream_changed .
 RUN GIT_SSH_COMMAND='ssh -i /home/app/.ssh/deploy-standalone -o StrictHostKeyChecking=no' git pull
+RUN git checkout staging
 
 
 ARG AIIDA_REST_API
