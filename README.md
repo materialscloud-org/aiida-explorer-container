@@ -1,3 +1,9 @@
+> [!WARNING]
+> This repository is **deprecated** and no longer maintained.
+>
+> Please see **https://github.com/aiidateam/aiida-explorer** instead.
+
+
 # aiida-explorer
 
 Stand-alone docker container for AiiDA EXPLORE section
